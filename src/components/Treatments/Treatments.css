@@ -1,0 +1,722 @@
+/* Treatments.css */
+
+/* ================================
+   CSS Variables
+   ================================ */
+:root {
+  --treatment-card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  --treatment-card-shadow-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --treatment-transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --treatment-border-radius: 1.5rem;
+}
+
+/* ================================
+   Section Styles
+   ================================ */
+.treatments-featured {
+  padding: clamp(4rem, 8vw, 8rem) 0;
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #fafafa 100%
+  );
+  position: relative;
+  overflow: hidden;
+}
+
+.treatments-featured::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #e5e5e5 50%,
+    transparent
+  );
+}
+
+/* Header Animation */
+.treatments-header {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: var(--treatment-transition);
+}
+
+.treatments-header.animate-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ================================
+   Treatments List
+   ================================ */
+.treatments-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 5vw, 6rem);
+  margin-top: clamp(3rem, 5vw, 5rem);
+}
+
+/* ================================
+   Treatment Card
+   ================================ */
+.treatment-card {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+  background: #ffffff;
+  border-radius: var(--treatment-border-radius);
+  overflow: hidden;
+  box-shadow: var(--treatment-card-shadow);
+  transition: var(--treatment-transition);
+  opacity: 0;
+  transform: translateY(50px) scale(0.95);
+  position: relative;
+  will-change: transform, opacity;
+}
+
+.treatment-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    transparent,
+    rgba(139, 92, 246, 0.1) 50%,
+    transparent
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.treatment-card.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.treatment-card:hover {
+  box-shadow: var(--treatment-card-shadow-hover);
+  transform: translateY(-8px);
+}
+
+.treatment-card:hover::after {
+  opacity: 1;
+}
+
+.treatment-card.reverse {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.treatment-card.reverse .treatment-image {
+  order: 2;
+}
+
+.treatment-card.reverse .treatment-content {
+  order: 1;
+}
+
+/* ================================
+   Treatment Image
+   ================================ */
+.treatment-image {
+  position: relative;
+  height: 100%;
+  min-height: 450px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f5f5 0%, #e5e5e5 100%);
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.treatment-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.treatment-img.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.treatment-card:hover .treatment-img {
+  transform: scale(1.08);
+}
+
+/* Image Overlay */
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.treatment-card:hover .image-overlay {
+  opacity: 1;
+}
+
+/* Popularity Badge */
+.popularity-badge {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: linear-gradient(135deg, #8b5cf6, #6366f1);
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.125rem;
+  box-shadow: 
+    0 10px 15px -3px rgba(139, 92, 246, 0.3),
+    0 4px 6px -2px rgba(139, 92, 246, 0.2);
+  backdrop-filter: blur(10px);
+  z-index: 2;
+  animation: badgeBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s both;
+}
+
+@keyframes badgeBounce {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.popularity-badge span {
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.popularity-badge small {
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.9;
+}
+
+/* ================================
+   Treatment Content
+   ================================ */
+.treatment-content {
+  display: flex;
+  align-items: center;
+  padding: clamp(2rem, 4vw, 3.5rem);
+  background: #ffffff;
+}
+
+.treatment-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+/* Treatment Header */
+.treatment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.treatment-name {
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1a1a1a;
+  margin: 0;
+  background: linear-gradient(135deg, #1a1a1a 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all 0.3s ease;
+}
+
+.treatment-card:hover .treatment-name {
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.treatment-duration {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1rem;
+  background: #fafafa;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #666666;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.treatment-card:hover .treatment-duration {
+  background: #f3f0ff;
+  border-color: #e9d5ff;
+  color: #8b5cf6;
+}
+
+.treatment-duration svg {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.treatment-card:hover .treatment-duration svg {
+  opacity: 1;
+}
+
+/* Treatment Description */
+.treatment-description {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: #666666;
+  margin: 0;
+}
+
+/* ================================
+   Treatment Benefits
+   ================================ */
+.treatment-benefits {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.treatment-benefits li {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #666666;
+  padding-left: 0.25rem;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.treatment-card.active .treatment-benefits li {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.treatment-benefits .check-icon {
+  flex-shrink: 0;
+  color: #10b981;
+  background: #d1fae5;
+  padding: 0.25rem;
+  border-radius: 0.375rem;
+  transition: all 0.3s ease;
+}
+
+.treatment-benefits li:hover .check-icon {
+  background: #10b981;
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* ================================
+   Treatment Footer
+   ================================ */
+.treatment-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid #f0f0f0;
+  flex-wrap: wrap;
+}
+
+.treatment-price {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.price-label {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #999999;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.price-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #8b5cf6;
+  line-height: 1;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.treatment-cta {
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.treatment-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.treatment-cta:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* ================================
+   Loading Animation
+   ================================ */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.treatment-img:not(.loaded) {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 0%,
+    #f8f8f8 50%,
+    #f0f0f0 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ================================
+   Responsive Design
+   ================================ */
+
+/* Large Desktop */
+@media (min-width: 1400px) {
+  .treatment-image {
+    min-height: 500px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .treatments-featured {
+    padding: 6rem 0;
+  }
+
+  .treatment-card {
+    gap: 2rem;
+  }
+
+  .treatment-image {
+    min-height: 400px;
+  }
+
+  .treatment-name {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .treatment-content {
+    padding: 2.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .treatments-featured {
+    padding: 4rem 0;
+  }
+
+  .treatments-list {
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+  }
+
+  .treatment-card,
+  .treatment-card.reverse {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .treatment-card.reverse .treatment-image,
+  .treatment-card.reverse .treatment-content {
+    order: initial;
+  }
+
+  .treatment-image {
+    min-height: 320px;
+  }
+
+  .treatment-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .treatment-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .treatment-duration {
+    padding: 0.5rem 0.875rem;
+    font-size: 0.8125rem;
+  }
+
+  .treatment-benefits {
+    gap: 0.875rem;
+  }
+
+  .treatment-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .treatment-cta {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .popularity-badge {
+    top: 1rem;
+    right: 1rem;
+    padding: 0.625rem 1rem;
+  }
+
+  .popularity-badge span {
+    font-size: 1rem;
+  }
+
+  .price-value {
+    font-size: 1.75rem;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .treatment-image {
+    min-height: 280px;
+  }
+
+  .treatment-content {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .treatment-benefits {
+    gap: 0.75rem;
+  }
+
+  .treatment-benefits li {
+    font-size: 0.875rem;
+  }
+
+  .price-value {
+    font-size: 1.5rem;
+  }
+
+  .treatment-name {
+    font-size: 1.5rem;
+  }
+}
+
+/* ================================
+   Dark Mode Support
+   ================================ */
+@media (prefers-color-scheme: dark) {
+  .treatments-featured {
+    background: linear-gradient(180deg, #0a0a0a 0%, #121212 100%);
+  }
+
+  .treatments-featured::before {
+    background: linear-gradient(90deg, transparent, #2a2a2a 50%, transparent);
+  }
+
+  .treatment-card {
+    background: #1a1a1a;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  }
+
+  .treatment-card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.3);
+  }
+
+  .treatment-content {
+    background: #1a1a1a;
+  }
+
+  .treatment-name {
+    background: linear-gradient(135deg, #ffffff 0%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .treatment-duration {
+    background: #242424;
+    color: #a3a3a3;
+  }
+
+  .treatment-card:hover .treatment-duration {
+    background: #2d1b4e;
+    border-color: #3b2667;
+  }
+
+  .treatment-description {
+    color: #a3a3a3;
+  }
+
+  .treatment-benefits li {
+    color: #a3a3a3;
+  }
+
+  .treatment-footer {
+    border-top-color: #2a2a2a;
+  }
+
+  .price-label {
+    color: #737373;
+  }
+
+  .image-overlay {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.3) 100%);
+  }
+}
+
+/* ================================
+   Print Styles
+   ================================ */
+@media print {
+  .treatment-card {
+    break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #e5e5e5;
+    transform: none !important;
+  }
+
+  .popularity-badge {
+    display: none;
+  }
+
+  .treatment-cta {
+    display: none;
+  }
+}
+
+/* ================================
+   Accessibility
+   ================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .treatment-card,
+  .treatment-img,
+  .treatment-cta,
+  .popularity-badge {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .treatment-card.active {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Focus Visible */
+.treatment-cta:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 4px;
+  border-radius: 0.5rem;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .treatment-card {
+    border: 2px solid currentColor;
+  }
+
+  .treatment-name {
+    -webkit-text-fill-color: initial;
+    background: none;
+    color: #1a1a1a;
+  }
+
+  .popularity-badge {
+    border: 2px solid #ffffff;
+  }
+}
+
+/* ================================
+   Performance Optimizations
+   ================================ */
+.treatment-card {
+  content-visibility: auto;
+  contain-intrinsic-size: 500px;
+}
+
+.treatment-img {
+  content-visibility: auto;
+}

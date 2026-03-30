@@ -1,0 +1,118 @@
+/* ===== SLS MEDICAL AESTHETICS - CSS VARIABLES ===== */
+
+:root {
+  /* PRIMARY - Warm Gold/Champagne Palette */
+  --color-primary: #C8A87D;
+  --color-primary-light: #D4B896;
+  --color-primary-dark: #B8956A;
+  --color-primary-hover: #D9C4A0;
+  
+  /* NEUTRALS */
+  --color-dark: #1E1E1E;
+  --color-dark-soft: #2D2D2D;
+  --color-gray-dark: #4A4A4A;
+  --color-gray: #7A7A7A;
+  --color-gray-light: #A5A5A5;
+  --color-gray-lighter: #E5E5E5;
+  --color-cream: #F8F6F3;
+  --color-cream-dark: #F0EDE8;
+  --color-white: #FFFFFF;
+  
+  /* ACCENTS */
+  --color-success: #4A7C59;
+  --color-error: #C75050;
+  --color-overlay: rgba(30, 30, 30, 0.7);
+  --color-overlay-light: rgba(30, 30, 30, 0.5);
+  
+  /* GRADIENTS */
+  --gradient-gold: linear-gradient(135deg, #C8A87D 0%, #D4B896 50%, #C8A87D 100%);
+  --gradient-gold-horizontal: linear-gradient(90deg, #B8956A 0%, #C8A87D 50%, #D4B896 100%);
+  --gradient-dark: linear-gradient(180deg, #1E1E1E 0%, #2D2D2D 100%);
+  --gradient-cream: linear-gradient(180deg, #FFFFFF 0%, #F8F6F3 100%);
+  --gradient-hero-overlay: linear-gradient(180deg, rgba(30, 30, 30, 0.4) 0%, rgba(30, 30, 30, 0.7) 100%);
+  
+  /* FONTS */
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Jost', sans-serif;
+  
+  /* FONT SIZES - Fluid Typography */
+  --text-xs: clamp(0.7rem, 0.8vw, 0.75rem);
+  --text-sm: clamp(0.8rem, 0.9vw, 0.875rem);
+  --text-base: clamp(0.95rem, 1vw, 1rem);
+  --text-lg: clamp(1.05rem, 1.15vw, 1.125rem);
+  --text-xl: clamp(1.2rem, 1.5vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 2vw, 2rem);
+  --text-3xl: clamp(2rem, 3vw, 2.75rem);
+  --text-4xl: clamp(2.5rem, 4vw, 3.5rem);
+  --text-5xl: clamp(3rem, 5vw, 4.5rem);
+  --text-hero: clamp(3rem, 6vw, 5.5rem);
+  
+  /* LINE HEIGHTS */
+  --leading-tight: 1.1;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+  
+  /* LETTER SPACING */
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.05em;
+  --tracking-wider: 0.1em;
+  --tracking-widest: 0.2em;
+  
+  /* SPACING */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+  
+  /* SECTION PADDING */
+  --section-padding-y: clamp(60px, 10vw, 120px);
+  --section-padding-x: clamp(20px, 5vw, 80px);
+  
+  /* CONTAINER */
+  --container-max: 1400px;
+  --container-narrow: 900px;
+  --container-wide: 1600px;
+  
+  /* BORDER RADIUS */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+  
+  /* SHADOWS */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.1);
+  --shadow-gold: 0 4px 20px rgba(200, 168, 125, 0.25);
+  
+  /* TRANSITIONS */
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+  --transition-slow: 500ms ease;
+  --transition-smooth: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Z-INDEX SCALE */
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-tooltip: 600;
+}
+
+/* Dark mode support (optional) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Can be customized if dark mode is needed */
+  }
+}
